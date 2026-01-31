@@ -3,6 +3,9 @@
 (require racket/gui/easy
          racket/gui/easy/operator)
 
+; configure by reading the .screenlayout directory
+(define layouts (in-directory (build-path (find-system-path 'home-dir) (string->path ".screenlayout"))))
+
 ; configure screen brightness file, this one works with my toshiba laptop
 (define @brightness-file (@ "/sys/class/backlight/intel_backlight/brightness"))
 
@@ -60,9 +63,13 @@
     (vpanel
      (slider
       #:min-value 0
-      #:max-value 5000
+      #:max-value 100000
       @bright (lambda (val) (and (set-brightness! val) val)) ; (λ:= @bright)
-      #:style '(horizontal plain))))))
+      #:style '(horizontal plain)))
+    (vpanel
+     (choice
+      '("Val 1" "Val 2")
+      (lambda (val) (print val)))))))
 
 (module+ main
   (render (app)))
