@@ -1,7 +1,8 @@
 #lang racket/base
 
 (require racket/gui/easy
-         racket/gui/easy/operator)
+         racket/gui/easy/operator
+         racket/match)
 
 ; configure by reading the .screenlayout directory
 (define layouts (in-directory (build-path (find-system-path 'home-dir) (string->path ".screenlayout"))))
